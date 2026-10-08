@@ -2,7 +2,7 @@
 
 > A full-stack capstone project — Pure C REST backend + React frontend + MongoDB Atlas
 
-![CI/CD](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)
+![CI/CD](https://github.com/asifhas2/West-Collection-system/actions/workflows/ci.yml/badge.svg)
 
 ---
 
