@@ -1,0 +1,103 @@
+name: 🚀 CI/CD — Smart Waste Management System
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # ─── Job 1: Build & Lint Frontend ─────────────────────────────────────────
+  frontend:
+    name: ⚛️ Frontend — Build & Lint
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔨 Build production bundle
+        run: npm run build
+
+      - name: 📤 Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 7
+
+  # ─── Job 2: Build C Backend ───────────────────────────────────────────────
+  backend:
+    name: 🔧 Backend — Compile C Server
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Install GCC
+        run: sudo apt-get install -y gcc
+
+      - name: 🔒 Create mongodb_config.h from Secrets
+        run: |
+          cat > mongodb_config.h << 'EOF'
+          #ifndef MONGODB_CONFIG_H
+          #define MONGODB_CONFIG_H
+          #define MONGODB_URI      "${{ secrets.MONGODB_URI }}"
+          #define MONGODB_USER     "${{ secrets.MONGODB_USER }}"
+          #define MONGODB_PASS     "${{ secrets.MONGODB_PASS }}"
+          #define MONGODB_CLUSTER  "${{ secrets.MONGODB_CLUSTER }}"
+          #define MONGODB_DB_NAME  "smart_waste_db"
+          #define MONGODB_APP_NAME "Cluster0"
+          #endif
+          EOF
+
+      - name: 🏗️ Compile C backend
+        run: gcc -O2 server.c router.c db.c cJSON.c -o server -lm
+
+      - name: ✅ Verify binary exists
+        run: |
+          if [ -f server ]; then
+            echo "✅ C backend compiled successfully"
+            ls -lh server
+          else
+            echo "❌ Compilation failed — binary not found"
+            exit 1
+          fi
+
+  # ─── Job 3: Summary ────────────────────────────────────────────────────────
+  summary:
+    name: 📋 Build Summary
+    runs-on: ubuntu-latest
+    needs: [frontend, backend]
+    if: always()
+
+    steps:
+      - name: 🎉 All jobs passed
+        if: needs.frontend.result == 'success' && needs.backend.result == 'success'
+        run: echo "✅ Both frontend and backend built successfully!"
+
+      - name: ❌ Some jobs failed
+        if: needs.frontend.result != 'success' || needs.backend.result != 'success'
+        run: |
+          echo "Frontend: ${{ needs.frontend.result }}"
+          echo "Backend:  ${{ needs.backend.result }}"
+          exit 1

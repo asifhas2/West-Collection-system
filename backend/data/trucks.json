@@ -1,0 +1,26 @@
+[
+  {
+    "id": "TRK-501",
+    "licensePlate": "ECO-TRK-88",
+    "driverName": "Mike Collector",
+    "capacityKg": 3000,
+    "currentLoadKg": 1200,
+    "status": "Available"
+  },
+  {
+    "id": "TRK-502",
+    "licensePlate": "ECO-TRK-99",
+    "driverName": "David Smith",
+    "capacityKg": 4500,
+    "currentLoadKg": 3100,
+    "status": "In Collection"
+  },
+  {
+    "id": "TRK-503",
+    "licensePlate": "ECO-TRK-44",
+    "driverName": "Unassigned",
+    "capacityKg": 3000,
+    "currentLoadKg": 0,
+    "status": "Maintenance"
+  }
+]

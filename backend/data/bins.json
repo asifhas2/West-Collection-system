@@ -1,0 +1,42 @@
+[
+  {
+    "id": "BIN-1001",
+    "locationName": "Central Market North Gate",
+    "lat": 23.8103,
+    "lng": 90.4125,
+    "capacityKg": 500,
+    "fillLevelPercent": 85,
+    "status": "Full",
+    "wasteType": "Plastic"
+  },
+  {
+    "id": "BIN-1002",
+    "locationName": "Green Park West Corner",
+    "lat": 23.8120,
+    "lng": 90.4150,
+    "capacityKg": 300,
+    "fillLevelPercent": 40,
+    "status": "Normal",
+    "wasteType": "Paper"
+  },
+  {
+    "id": "BIN-1003",
+    "locationName": "Residential Block B Plaza",
+    "lat": 23.8080,
+    "lng": 90.4100,
+    "capacityKg": 450,
+    "fillLevelPercent": 92,
+    "status": "Full",
+    "wasteType": "Organic"
+  },
+  {
+    "id": "BIN-1004",
+    "locationName": "Industrial Zone Hub 3",
+    "lat": 23.8150,
+    "lng": 90.4200,
+    "capacityKg": 600,
+    "fillLevelPercent": 15,
+    "status": "Damaged",
+    "wasteType": "Metal"
+  }
+]

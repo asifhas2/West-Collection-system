@@ -1,0 +1,28 @@
+# ─── Node / NPM ───────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── Vite / Frontend Build ────────────────────────────────────────────────────
+frontend/dist/
+frontend/.vite/
+
+# ─── C Backend Compiled Binary ────────────────────────────────────────────────
+backend/server.exe
+backend/*.o
+
+# ─── Environment & Secrets ────────────────────────────────────────────────────
+.env
+.env.*
+# NOTE: mongodb_config.h contains credentials — move them to env vars!
+backend/mongodb_config.h
+
+# ─── OS & Editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "COL-201",
+    "name": "Mike Collector",
+    "phone": "+1-555-0199",
+    "truckId": "TRK-501",
+    "assignedRouteId": "RTE-701",
+    "status": "On Route",
+    "totalCollections": 142
+  },
+  {
+    "id": "COL-202",
+    "name": "David Smith",
+    "phone": "+1-555-0198",
+    "truckId": "TRK-502",
+    "assignedRouteId": "RTE-702",
+    "status": "Available",
+    "totalCollections": 98
+  }
+]
